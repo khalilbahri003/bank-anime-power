@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="security-cleanup.js"></script>
+  <title>عروض أنمي باور</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .icon {
+      padding: 20px;
+      background-color: #161b22;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .logo a {
+      text-decoration: none;
+      color: #58a6ff;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    .menu {
+      background-color: #21262d;
+      padding: 15px 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+    .menu ul {
+      list-style: none;
+      display: inline-block;
+    }
+    .menu ul li {
+      display: inline-block;
+      margin: 0 15px;
+    }
+    .menu ul li a {
+      text-decoration: none;
+      color: #c9d1d9;
+      font-size: 16px;
+      padding: 8px 12px;
+      transition: all 0.3s ease;
+    }
+    .menu ul li a:hover {
+      background-color: #58a6ff;
+      color: #0d1117;
+      border-radius: 4px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      flex-grow: 1;
+    }
+    .product-card {
+      background-color: #161b22;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid #30363d;
+    }
+    .discount-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #ff7b72;
+      color: #0d1117;
+      padding: 5px 10px;
+      font-size: 12px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .product-info {
+      padding: 20px;
+      text-align: center;
+      flex-grow: 1;
+    }
+    .product-info h3 {
+      color: #58a6ff;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .product-info p {
+      font-size: 14px;
+      color: #8b949e;
+      margin-bottom: 15px;
+    }
+    .product-info .price {
+      font-size: 16px;
+      font-weight: bold;
+      color: #c9d1d9;
+      margin-bottom: 5px;
+      text-decoration: line-through;
+    }
+    .product-info .new-price {
+      color: #3fb950;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .product-link {
+      display: block;
+      width: 100%;
+      padding: 12px 0;
+      border-radius: 8px;
+      background-color: #58a6ff;
+      color: #0d1117;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .product-link:hover { background-color: #3a6ed8; }
+    .product-link:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+    .product-info button {
+      background-color: #58a6ff;
+      color: #0d1117;
+      border: none;
+      padding: 12px 0;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+    .product-info button:hover {
+      background-color: #3a6ed8;
+    }
+    footer {
+      background-color: #161b22;
+      text-align: center;
+      padding: 40px 20px 20px;
+      font-size: 14px;
+      color: #8b949e;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+      margin-top: auto;
+    }
+    .footer-container {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .footer-section h4 {
+      color: #c9d1d9;
+      margin-bottom: 10px;
+    }
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+    .footer-section ul li {
+      margin: 5px 0;
+    }
+    .footer-section ul li a {
+      text-decoration: none;
+      color: #58a6ff;
+    }
+    .footer-section ul li a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="icon">
+    <div class="logo">
+      <a href="#">عروض أنمي باور</a>
+    </div>
+  </div>
+
+  <nav class="menu">
+    <ul>
+      <li><a href="#">الرئيسية</a></li>
+      <li><a href="store.html">كل المنتجات</a></li>
+      <li><a href="offer.html">عروض وتخفيضات</a></li>
+      <li><a href="https://www.facebook.com/groups/anime.power.ca/?ref=share&mibextid=NSMWBT">اتصل بنا</a></li>
+    </ul>
+  </nav>
+
+  <section class="products" id="offerContainer"></section>
+
+  <div style="text-align: center; margin-bottom: 30px;">
+    <button onclick="addNewOffer()" style="background-color:#3fb950; color:#0d1117; border:none; padding:12px 24px; font-size:16px; border-radius:8px; cursor:pointer;">+ أضف عرض جديد</button>
+  </div>
+
+  <p style="margin:18px auto 0;max-width:760px;text-align:center;color:#ffd580;line-height:1.7">نسخة تجريبية: العروض والأسعار للعرض فقط، ولا يوجد دفع حقيقي.</p>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>عن الموقع</h4>
+        <ul>
+          <li><a href="features.html">من نحن</a></li>
+          <li><a href="ASK.html">سياسة الخصوصية</a></li>
+          <li><a href="https://www.facebook.com/groups/anime.power.ca/?ref=share&mibextid=NSMWBT">مجموعة باور</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>روابط سريعة</h4>
+        <ul>
+          <li><a href="#">الرئيسية</a></li>
+          <li><a href="https://www.facebook.com/Central.Power.Bank">اتصل بنا</a></li>
+          <li><a href="https://t.me/CentralPowerBank">خدمة العملاء</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 جميع الحقوق محفوظة</p>
+  </footer>
+
+  <script>
+    const container = document.getElementById("offerContainer");
+
+    function safeReadOffers() {
+      try {
+        const value = JSON.parse(localStorage.getItem("offers") || "null");
+        return Array.isArray(value) ? value : null;
+      } catch {
+        return null;
+      }
+    }
+
+    function safeImageName(value) {
+      return typeof value === "string" && /^[a-zA-Z0-9_-]+\.(?:jpe?g|png|webp|gif)$/i.test(value)
+        ? value
+        : "a01.jpg";
+    }
+
+    const defaultOffers = [
+      { name: "vip+ بطاقة الشخصيات المهمة ", description: "خصم 30% لفترة محدودة.", oldPrice: "25.000 S.K", newPrice: "17.500 S.k", image: "a01.jpg" },
+      { name: "vip بطاقة الشخصيات المهمة ", description: "خصم 30% لفترة محدودة.", oldPrice: "20.000 S.K", newPrice: "14.000", image: "a02.jpg" },
+      { name: "بطاقة انتقال خاصة", description: "عرض خاص لمن الانتقال", oldPrice: "5.000 S.K", newPrice: "3.500 S.K", image: "a03.jpg" },
+      { name: " بطاقة اللعنة  ", description: "خصم 30% لفترة محدودة.", oldPrice: "5.500 S.K", newPrice: "2.500 S.k", image: "a011.jpg" },
+      { name: " بطاقة المضاعفة", description: "خصم 30% لفترة محدودة.", oldPrice: "5.500 S.K", newPrice: "3.000", image: "a010.jpg" }
+    ];
+
+    let offers = (safeReadOffers() || defaultOffers).slice(0, 100)
+      .filter(item => item && typeof item === "object")
+      .map(item => ({
+        name: String(item.name || "عرض").slice(0, 160),
+        description: String(item.description || "").slice(0, 600),
+        oldPrice: String(item.oldPrice || "").slice(0, 80),
+        newPrice: String(item.newPrice || "").slice(0, 80),
+        image: safeImageName(item.image)
+      }));
+
+    function saveOffers() {
+      localStorage.setItem("offers", JSON.stringify(offers));
+    }
+
+    function createCard(offer) {
+      const card = document.createElement("article");
+      card.className = "product-card";
+      const badge = document.createElement("div");
+      badge.className = "discount-tag";
+      badge.textContent = "عرض تجريبي";
+      const image = document.createElement("img");
+      image.src = safeImageName(offer.image);
+      image.alt = offer.name;
+      image.loading = "lazy";
+      const info = document.createElement("div");
+      info.className = "product-info";
+      const title = document.createElement("h3");
+      title.textContent = offer.name;
+      const description = document.createElement("p");
+      description.textContent = offer.description;
+      const oldPrice = document.createElement("div");
+      oldPrice.className = "price";
+      oldPrice.textContent = offer.oldPrice;
+      const newPrice = document.createElement("div");
+      newPrice.className = "new-price";
+      newPrice.textContent = offer.newPrice;
+      const query = new URLSearchParams({
+        image: safeImageName(offer.image),
+        name: offer.name,
+        desc: offer.description,
+        price: offer.newPrice
+      });
+      const link = document.createElement("a");
+      link.href = `product.html?${query.toString()}`;
+      link.className = "product-link";
+      link.textContent = "عرض التفاصيل";
+      info.append(title, description, oldPrice, newPrice, link);
+      card.append(badge, image, info);
+      container.append(card);
+    }
+
+    function addNewOffer() {
+      const name = prompt("أدخل اسم المنتج:");
+      const description = prompt("أدخل وصف العرض:");
+      const oldPrice = prompt("أدخل السعر القديم:");
+      const newPrice = prompt("أدخل السعر الجديد:");
+      const image = prompt("أدخل اسم صورة محلية (مثلاً: a04.jpg):");
+
+      if (!name || !description || !oldPrice || !newPrice || !image) return;
+      if (name.length > 160 || description.length > 600 || oldPrice.length > 80 || newPrice.length > 80 || !/^[a-zA-Z0-9_-]+\.(?:jpe?g|png|webp|gif)$/i.test(image)) {
+        alert("تحقق من طول النصوص واستخدم اسم ملف صورة محليًا مثل a04.jpg.");
+        return;
+      }
+      if (offers.length >= 100) {
+        alert("وصلت إلى الحد الأقصى للعروض التجريبية.");
+        return;
+      }
+      const newOffer = { name: name.trim(), description: description.trim(), oldPrice: oldPrice.trim(), newPrice: newPrice.trim(), image };
+      offers.push(newOffer);
+      createCard(newOffer);
+      saveOffers();
+    }
+
+    offers.forEach(createCard);
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="security-cleanup.js"></script>
+  <title>واجهة دفع تجريبية - بنك باور</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background-color: #161b22;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    }
+    h2 {
+      color: #58a6ff;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .product-info {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    .product-info img {
+      width: 100%;
+      max-height: 200px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #30363d;
+      object-fit: cover;
+    }
+    .product-info h3 {
+      margin-bottom: 5px;
+      color: #58a6ff;
+    }
+    .product-info p {
+      font-size: 14px;
+      color: #8b949e;
+      margin-bottom: 20px;
+    }
+    form input, form button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+    form input {
+      background-color: #21262d;
+      color: #c9d1d9;
+    }
+    form input:focus {
+      background-color: #2b3139;
+      outline: none;
+    }
+    form button {
+      background-color: #58a6ff;
+      color: #0d1117;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      border-radius: 8px;
+    }
+    form button:hover {
+      background-color: #3a6ed8;
+    }
+    #paymentMessage {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    #paymentMessage.success {
+      color: #58ff8c;
+    }
+    #paymentMessage.error {
+      color: #ff5858;
+    }
+    .payment-notice { border: 1px solid #d29922; background: #2b2415; border-radius: 8px; padding: 18px; line-height: 1.8; }
+    .payment-notice strong { color: #ffd580; }
+    .payment-notice p { margin: 8px 0 12px; }
+    .payment-notice a { color: #79c0ff; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>تفاصيل الدفع</h2>
+
+    <div class="product-info">
+      <img id="productImage" src="" alt="صورة المنتج" />
+      <h3 id="productName">اسم المنتج</h3>
+      <p id="productDesc">وصف المنتج</p>
+    </div>
+
+    <div class="payment-notice" role="note">
+      <strong>الدفع غير متاح في هذه النسخة التجريبية.</strong>
+      <p>لا تدخل رقم بطاقة أو رمز CVV. لا يوجد اتصال ببنك أو مزوّد دفع، ولن تُخصم أي أموال.</p>
+      <a href="store.html">العودة إلى المتجر</a>
+    </div>
+  </div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const imageName = params.get("image") || "a01.jpg";
+  const safeImage = /^[a-zA-Z0-9_-]+\.(?:jpe?g|png|webp|gif)$/i.test(imageName) ? imageName : "a01.jpg";
+  document.getElementById("productImage").src = safeImage;
+  document.getElementById("productName").textContent = params.get("name") || "منتج تجريبي";
+  document.getElementById("productDesc").textContent = params.get("desc") || "لا يوجد وصف لهذا المنتج.";
+</script>
+
+</body>
+</html>

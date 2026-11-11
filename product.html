@@ -1,0 +1,161 @@
+<!DOCTYPE html> 
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="security-cleanup.js"></script>
+  <title>تفاصيل المنتج</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #161b22;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #30363d;
+    }
+
+    h1 {
+      color: #58a6ff;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #8b949e;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #58a6ff;
+      color: #0d1117;
+      border: none;
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #3a6ed8;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #21262d;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .modal-content h2 {
+      color: #58a6ff;
+      margin-bottom: 20px;
+    }
+
+    .close {
+      color: #c9d1d9;
+      float: left;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <img id="productImage" src="" alt="صورة المنتج">
+  <h1 id="productName">اسم المنتج</h1>
+  <p id="productDesc">وصف المنتج</p>
+  <p style="color:#ffd580;line-height:1.7">نسخة تجريبية: لا يوجد دفع حقيقي أو اتصال بحساب أو خزينة.</p>
+  <button onclick="showPaymentOptions()">عرض خيارات الشراء التجريبية</button>
+</div>
+
+<div id="paymentModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>خيارات تجريبية فقط</h2>
+    <button onclick="payWith('account')">عرض صفحة الحساب التجريبية</button>
+    <button onclick="payWith('team')">عرض صفحة الخزينة التجريبية</button>
+  </div>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("name") || "منتج تجريبي";
+  const desc = params.get("desc") || "وصف غير متاح";
+  const imageName = params.get("image") || "a01.jpg";
+  const image = /^[a-zA-Z0-9_-]+\.(?:jpe?g|png|webp|gif)$/i.test(imageName) ? imageName : "a01.jpg";
+  const rawPrice = (params.get("price") || "").replace(/[^0-9]/g, "");
+  const originalPrice = rawPrice ? Number(rawPrice) : 0;
+
+  document.getElementById("productImage").src = image;
+  document.getElementById("productName").textContent = name;
+  document.getElementById("productDesc").textContent = desc;
+
+  function showPaymentOptions() {
+    document.getElementById("paymentModal").style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("paymentModal").style.display = "none";
+  }
+
+  function payWith(method) {
+    if (method !== "account" && method !== "team") return;
+    const destination = method === "account" ? "payy.html" : "cofre.html";
+    const url = new URLSearchParams({
+      name,
+      desc,
+      image,
+      price: String(originalPrice)
+    });
+    window.location.href = `${destination}?${url.toString()}`;
+  }
+
+  window.addEventListener("click", function(event) {
+    const modal = document.getElementById("paymentModal");
+    if (event.target === modal) modal.style.display = "none";
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="security-cleanup.js"></script>
+  <title>تسجيل الدخول / فتح حساب</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      min-height: 100vh;
+    }
+
+    .icon {
+      padding: 20px;
+      background-color: #161b22;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: #58a6ff;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .menu {
+      background-color: #21262d;
+      padding: 15px 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+
+    .menu ul {
+      list-style: none;
+    }
+
+    .menu ul li {
+      display: inline-block;
+      margin: 0 15px;
+    }
+
+    .menu ul li a {
+      text-decoration: none;
+      color: #c9d1d9;
+      font-size: 16px;
+      padding: 8px 12px;
+      transition: all 0.3s ease;
+    }
+
+    .menu ul li a:hover {
+      background-color: #58a6ff;
+      color: #0d1117;
+      border-radius: 4px;
+    }
+
+    .form {
+      background-color: #161b22;
+      width: 350px;
+      max-width: 90%;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+      color: #c9d1d9;
+    }
+
+    .form h2 {
+      color: #58a6ff;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form input[type="email"],
+    .form input[type="text"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 6px;
+      background-color: #21262d;
+      color: #c9d1d9;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .form input:focus {
+      background-color: #30363d;
+      outline: none;
+    }
+
+    .form .btnn {
+      width: 100%;
+      background-color: #58a6ff;
+      color: #0d1117;
+      border: none;
+      padding: 14px 0;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form .btnn:hover {
+      background-color: #3a6ed8;
+    }
+
+    .form .link {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 10px;
+      color: #8b949e;
+    }
+
+    .form .link a {
+      color: #58a6ff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .form .link a:hover {
+      text-decoration: underline;
+    }
+
+    .inputboite {
+      margin-bottom: 20px;
+    }
+
+    #loginMessage, #registerMessage {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #58a6ff;
+      min-height: 24px;
+    }
+
+    .footer {
+      background-color: #161b22;
+      padding: 40px;
+      color: #c9d1d9;
+      margin-top: 40px;
+      border-top: 1px solid #30363d;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .footer-section h4 {
+      color: #58a6ff;
+      font-size: 18px;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-section ul li {
+      margin: 6px 0;
+    }
+
+    .footer-section ul li a {
+      color: #c9d1d9;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section ul li a:hover {
+      color: #58a6ff;
+      text-decoration: underline;
+    }
+
+    .copyright {
+      font-size: 13px;
+      color: #8b949e;
+      text-align: left;
+      margin-top: 30px;
+    }
+
+    .security-notice p { line-height: 1.8; text-align: center; margin-bottom: 18px; }
+    .browse-link { display: block; text-align: center; text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .footer-container {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .form {
+        width: 95%;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="icon">
+    <div class="logo"><a href="#">Bank Anime Power</a></div>
+  </div>
+
+  <div class="menu">
+    <ul>
+      <li><a href="#">الرئيسية</a></li>
+      <li><a href="features.html">من نحن</a></li>
+      <li><a href="#">تواصل معنا</a></li>
+    </ul>
+  </div>
+  <main class="form security-notice">
+    <h2>نسخة تجريبية</h2>
+    <p>تسجيل الدخول وفتح الحساب غير مفعّلين؛ لا تكتب كلمة مرور هنا. الموقع يعرض الصفحات والمنتجات فقط، وبيانات المنتجات المضافة تبقى في هذا المتصفح.</p>
+    <a class="btnn browse-link" href="store.html">تصفّح المنتجات</a>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>عن الموقع</h4>
+        <ul>
+          <li><a href="features.html">من نحن</a></li>
+          <li><a href="ASK.html">سياسة الخصوصية</a></li>
+          <li><a href="https://www.facebook.com/groups/anime.power.ca/?ref=share&mibextid=NSMWBT">مجموعة باور</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>روابط سريعة</h4>
+        <ul>
+          <li><a href="information.html">معلومات</a></li>
+          <li><a href="https://www.facebook.com/Central.Power.Bank">اتصل بنا</a></li>
+          <li><a href="https://www.facebook.com/share/16gaZVkgoY/">مديرة البنك</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 جميع الحقوق محفوظة</p>
+  </footer>
+
+
+</body>
+</html>
